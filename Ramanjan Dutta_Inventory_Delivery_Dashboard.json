@@ -1,0 +1,1298 @@
+{
+    "exportVersion": 10,
+    "dashboards": {
+        "dashboard-1": {
+            "title": "Member 3 - Inventory & Delivery Risk Monitoring",
+            "layout": [
+                {
+                    "w": 2,
+                    "h": 1,
+                    "x": 0,
+                    "y": 0,
+                    "i": "item-1"
+                },
+                {
+                    "w": 2,
+                    "h": 1,
+                    "x": 2,
+                    "y": 0,
+                    "i": "item-2"
+                },
+                {
+                    "w": 2,
+                    "h": 1,
+                    "x": 4,
+                    "y": 0,
+                    "i": "item-3"
+                },
+                {
+                    "w": 2,
+                    "h": 1,
+                    "x": 6,
+                    "y": 0,
+                    "i": "item-4"
+                },
+                {
+                    "w": 5,
+                    "h": 3,
+                    "x": 0,
+                    "y": 1,
+                    "i": "item-5"
+                },
+                {
+                    "w": 3,
+                    "h": 3,
+                    "x": 5,
+                    "y": 1,
+                    "i": "item-6"
+                },
+                {
+                    "w": 4,
+                    "h": 2,
+                    "x": 0,
+                    "y": 4,
+                    "i": "item-7"
+                },
+                {
+                    "w": 4,
+                    "h": 2,
+                    "x": 4,
+                    "y": 4,
+                    "i": "item-8"
+                },
+                {
+                    "w": 8,
+                    "h": 2,
+                    "x": 0,
+                    "y": 6,
+                    "i": "item-9"
+                },
+                {
+                    "w": 4,
+                    "h": 2,
+                    "x": 0,
+                    "y": 8,
+                    "i": "item-10"
+                },
+                {
+                    "w": 4,
+                    "h": 2,
+                    "x": 4,
+                    "y": 8,
+                    "i": "item-11"
+                },
+                {
+                    "w": 8,
+                    "h": 2,
+                    "x": 0,
+                    "y": 10,
+                    "i": "item-12"
+                }
+            ],
+            "description": "Warehouse stock movements and shipment tracking from Kafka topic 'inventory-logistics-data', with low-stock and delivery-delay alerts.",
+            "embedding": {
+                "anonymousAuthEnabled": false
+            },
+            "filters": [
+                {
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": true,
+                        "values": []
+                    },
+                    "name": "Warehouse",
+                    "linkedFields": [
+                        {
+                            "dataSourceId": "src-inv",
+                            "fieldPath": "warehouse"
+                        },
+                        {
+                            "dataSourceId": "src-invalert",
+                            "fieldPath": "warehouse"
+                        }
+                    ]
+                },
+                {
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": true,
+                        "values": []
+                    },
+                    "name": "Product",
+                    "linkedFields": [
+                        {
+                            "dataSourceId": "src-inv",
+                            "fieldPath": "product_name"
+                        },
+                        {
+                            "dataSourceId": "src-invalert",
+                            "fieldPath": "product_name"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "items": {
+        "item-1": {
+            "title": "Units Received (Stock In)",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-inv",
+            "iconValue": "number",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "event_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "stock_in"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "value": {
+                    "field": "quantity",
+                    "type": "quantitative",
+                    "inferredType": "Number",
+                    "channelType": "aggregation",
+                    "aggregate": "sum"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {},
+                "axes": {
+                    "value": {}
+                },
+                "channels": {
+                    "value": {
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Number",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "562411a6-15ec-4d96-a52b-bf27aef1711d"
+            }
+        },
+        "item-2": {
+            "title": "Units Issued (Stock Out)",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-inv",
+            "iconValue": "number",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "event_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "stock_out"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "value": {
+                    "field": "quantity",
+                    "type": "quantitative",
+                    "inferredType": "Number",
+                    "channelType": "aggregation",
+                    "aggregate": "sum"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {},
+                "axes": {
+                    "value": {}
+                },
+                "channels": {
+                    "value": {
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Number",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "26c5ee3b-2895-477c-8e3b-b37e8019eefa"
+            }
+        },
+        "item-3": {
+            "title": "Low-Stock Alerts",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-invalert",
+            "iconValue": "number",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "alert_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "LOW_STOCK"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "value": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {},
+                "axes": {
+                    "value": {}
+                },
+                "channels": {
+                    "value": {
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": [
+                    {
+                        "type": "discrete",
+                        "conditions": [
+                            {
+                                "target": {
+                                    "value": "value",
+                                    "type": "CHANNEL"
+                                },
+                                "operator": "NUMBER_GREATER_THAN",
+                                "value": "0"
+                            }
+                        ],
+                        "applyToEntireRow": false,
+                        "styling": {
+                            "color": "rgb(193, 4, 34)",
+                            "backgroundColor": "rgba(0, 0, 0, 0)",
+                            "fontStyle": "normal",
+                            "fontWeight": "bold",
+                            "textDecoration": "initial"
+                        }
+                    }
+                ]
+            },
+            "chartType": "Number",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "f744b7f3-b261-4e19-873d-a4e07db9f8da"
+            }
+        },
+        "item-4": {
+            "title": "Delivery Delay Alerts",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-invalert",
+            "iconValue": "number",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "alert_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "DELIVERY_DELAY"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "value": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {},
+                "axes": {
+                    "value": {}
+                },
+                "channels": {
+                    "value": {
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": [
+                    {
+                        "type": "discrete",
+                        "conditions": [
+                            {
+                                "target": {
+                                    "value": "value",
+                                    "type": "CHANNEL"
+                                },
+                                "operator": "NUMBER_GREATER_THAN",
+                                "value": "0"
+                            }
+                        ],
+                        "applyToEntireRow": false,
+                        "styling": {
+                            "color": "rgb(230, 157, 25)",
+                            "backgroundColor": "rgba(0, 0, 0, 0)",
+                            "fontStyle": "normal",
+                            "fontWeight": "bold",
+                            "textDecoration": "initial"
+                        }
+                    }
+                ]
+            },
+            "chartType": "Number",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "b0b77c12-a370-4b7b-9b9d-748fcd0de12e"
+            }
+        },
+        "item-5": {
+            "title": "Average Stock Level - Warehouse x Product",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-inv",
+            "iconValue": "heatmap",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "event_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "stock_in",
+                            "stock_out"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "x": {
+                    "field": "warehouse",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category"
+                },
+                "y": {
+                    "field": "product_name",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category"
+                },
+                "color": {
+                    "field": "stock_level_after",
+                    "type": "quantitative",
+                    "inferredType": "Number",
+                    "channelType": "aggregation",
+                    "aggregate": "mean"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {},
+                "axes": {
+                    "x": {
+                        "categoryLabelAngle": {
+                            "enabled": true,
+                            "value": "diagonal"
+                        }
+                    }
+                },
+                "channels": {
+                    "x": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Warehouse"
+                        }
+                    },
+                    "y": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Product"
+                        }
+                    },
+                    "color": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Avg stock (units)"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Custom"
+                        },
+                        "numberDecimals": {
+                            "enabled": true,
+                            "value": "0"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Heatmap",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "70f04512-a2c7-40ed-939b-6b711e60f05b"
+            }
+        },
+        "item-6": {
+            "title": "Shipment Status Mix",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-inv",
+            "iconValue": "donut",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "event_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "dispatched",
+                            "in_transit",
+                            "delivered",
+                            "delayed"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "label": {
+                    "field": "event_type",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category",
+                    "isLimiting": true,
+                    "limitingSize": "10",
+                    "allOthers": true
+                },
+                "value": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {},
+                "axes": {
+                    "value": {}
+                },
+                "channels": {
+                    "label": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Status"
+                        }
+                    },
+                    "value": {
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Donut",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "0b576bf6-6c26-43d5-ad80-cc8066f9392e"
+            }
+        },
+        "item-7": {
+            "title": "Shipment Status by Warehouse",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-inv",
+            "iconValue": "bar-stacked",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "event_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "dispatched",
+                            "in_transit",
+                            "delivered",
+                            "delayed"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "y": {
+                    "field": "warehouse",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category",
+                    "isLimiting": true,
+                    "limitingSize": "10"
+                },
+                "x": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                },
+                "color": {
+                    "field": "event_type",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {
+                    "colorDiscrete": {
+                        "enabled": true,
+                        "value": [
+                            "#1392AB",
+                            "#16CC62",
+                            "#196EE6",
+                            "#E6B219",
+                            "#E6196E",
+                            "#19C3E6",
+                            "#116149",
+                            "#E65D19",
+                            "#ABABAB",
+                            "#80340E",
+                            "#73E0A1",
+                            "#8CB6F2",
+                            "#F0D175",
+                            "#F075A8",
+                            "#75DBF0",
+                            "#70A092",
+                            "#F09E75",
+                            "#CDCDCD",
+                            "#71BECD",
+                            "#B3856E"
+                        ]
+                    }
+                },
+                "axes": {
+                    "x": {}
+                },
+                "channels": {
+                    "y": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Warehouse"
+                        }
+                    },
+                    "x": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "# Shipments"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    },
+                    "color": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Status"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Stacked Bar",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "891f6756-5d24-4d09-b05f-835df8901eaa"
+            }
+        },
+        "item-8": {
+            "title": "Delayed Deliveries by Destination Store",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-inv",
+            "iconValue": "bar-grouped",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "event_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "delayed"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "y": {
+                    "field": "destination_store",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category",
+                    "isLimiting": true,
+                    "limitingSize": "10"
+                },
+                "x": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {
+                    "dataValueLabels": {
+                        "enabled": true,
+                        "value": null
+                    },
+                    "colorDiscrete": {
+                        "enabled": true,
+                        "value": [
+                            "#E6B219"
+                        ]
+                    }
+                },
+                "axes": {
+                    "x": {}
+                },
+                "channels": {
+                    "y": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Store"
+                        }
+                    },
+                    "x": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "# Delayed"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Grouped Bar",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "8fcc7815-a79c-4d31-b3b7-7e4985d074d8"
+            }
+        },
+        "item-9": {
+            "title": "Stock Movements per Minute (IST)",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-inv",
+            "iconValue": "column-stacked",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "event_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "stock_in",
+                            "stock_out"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [
+                {
+                    "fieldPath": "minute_ist",
+                    "rawExpression": "{\n    $dateToString: {\n        format: \"%H:%M\",\n        date: \"$event_time\",\n        timezone: \"Asia/Kolkata\"\n    }\n}",
+                    "derivedMQL": "{\"$dateToString\":{\"format\":\"%H:%M\",\"date\":\"$event_time\",\"timezone\":\"Asia/Kolkata\"}}"
+                }
+            ],
+            "channels": {
+                "x": {
+                    "field": "minute_ist",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category"
+                },
+                "y": {
+                    "field": "quantity",
+                    "type": "quantitative",
+                    "inferredType": "Number",
+                    "channelType": "aggregation",
+                    "aggregate": "sum"
+                },
+                "color": {
+                    "field": "event_type",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {
+                    "colorDiscrete": {
+                        "enabled": true,
+                        "value": [
+                            "#1392AB",
+                            "#16CC62",
+                            "#196EE6",
+                            "#E6B219",
+                            "#E6196E",
+                            "#19C3E6",
+                            "#116149",
+                            "#E65D19",
+                            "#ABABAB",
+                            "#80340E",
+                            "#73E0A1",
+                            "#8CB6F2",
+                            "#F0D175",
+                            "#F075A8",
+                            "#75DBF0",
+                            "#70A092",
+                            "#F09E75",
+                            "#CDCDCD",
+                            "#71BECD",
+                            "#B3856E"
+                        ]
+                    }
+                },
+                "axes": {
+                    "x": {
+                        "categoryLabelAngle": {
+                            "enabled": true,
+                            "value": "diagonal"
+                        }
+                    }
+                },
+                "channels": {
+                    "x": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Time (IST)"
+                        }
+                    },
+                    "y": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Units moved"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    },
+                    "color": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Movement"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Stacked Column",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "d9fed7e4-317f-4abc-9714-ffca89e1572c"
+            }
+        },
+        "item-10": {
+            "title": "Low-Stock Alerts by Product",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-invalert",
+            "iconValue": "bar-stacked",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "alert_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "LOW_STOCK"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "y": {
+                    "field": "product_name",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category",
+                    "isLimiting": true,
+                    "limitingSize": "10"
+                },
+                "x": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                },
+                "color": {
+                    "field": "warehouse",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {
+                    "colorDiscrete": {
+                        "enabled": true,
+                        "value": [
+                            "#1392AB",
+                            "#16CC62",
+                            "#196EE6",
+                            "#E6B219",
+                            "#E6196E",
+                            "#19C3E6",
+                            "#116149",
+                            "#E65D19",
+                            "#ABABAB",
+                            "#80340E",
+                            "#73E0A1",
+                            "#8CB6F2",
+                            "#F0D175",
+                            "#F075A8",
+                            "#75DBF0",
+                            "#70A092",
+                            "#F09E75",
+                            "#CDCDCD",
+                            "#71BECD",
+                            "#B3856E"
+                        ]
+                    }
+                },
+                "axes": {
+                    "x": {}
+                },
+                "channels": {
+                    "y": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Product"
+                        }
+                    },
+                    "x": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "# Low-stock alerts"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    },
+                    "color": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Warehouse"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Stacked Bar",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "b35bb0e6-c0c2-42db-9b6c-80dcbb51bb91"
+            }
+        },
+        "item-11": {
+            "title": "Units Issued by Category",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-inv",
+            "iconValue": "bar-grouped",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "event_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "stock_out"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "y": {
+                    "field": "category",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category",
+                    "isLimiting": true,
+                    "limitingSize": "10"
+                },
+                "x": {
+                    "field": "quantity",
+                    "type": "quantitative",
+                    "inferredType": "Number",
+                    "channelType": "aggregation",
+                    "aggregate": "sum"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {
+                    "dataValueLabels": {
+                        "enabled": true,
+                        "value": null
+                    },
+                    "colorDiscrete": {
+                        "enabled": true,
+                        "value": [
+                            "#1392AB"
+                        ]
+                    }
+                },
+                "axes": {
+                    "x": {}
+                },
+                "channels": {
+                    "y": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Category"
+                        }
+                    },
+                    "x": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Units out"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Grouped Bar",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "9d5b95ed-a172-4743-93a9-1bdac806652b"
+            }
+        },
+        "item-12": {
+            "title": "Warehouse Stock Summary",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-inv",
+            "iconValue": "data-table",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "event_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "stock_in",
+                            "stock_out"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "group": {
+                    "field": "warehouse",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category"
+                },
+                "value": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                },
+                "value_series_0": {
+                    "field": "quantity",
+                    "type": "quantitative",
+                    "inferredType": "Number",
+                    "channelType": "aggregation",
+                    "aggregate": "sum"
+                },
+                "value_series_1": {
+                    "field": "stock_level_after",
+                    "type": "quantitative",
+                    "inferredType": "Number",
+                    "channelType": "aggregation",
+                    "aggregate": "mean"
+                },
+                "value_series_2": {
+                    "field": "stock_level_after",
+                    "type": "quantitative",
+                    "inferredType": "Number",
+                    "channelType": "aggregation",
+                    "aggregate": "min"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {
+                    "totalsColumn": {
+                        "enabled": false,
+                        "value": null
+                    }
+                },
+                "axes": {},
+                "channels": {
+                    "group": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Warehouse"
+                        }
+                    },
+                    "value": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "# Movements"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    },
+                    "value_series_0": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Units moved"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    },
+                    "value_series_1": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Avg stock level"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Custom"
+                        },
+                        "numberDecimals": {
+                            "enabled": true,
+                            "value": "0"
+                        }
+                    },
+                    "value_series_2": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Lowest stock seen"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": [
+                    {
+                        "type": "continuous",
+                        "conditions": [
+                            {
+                                "target": {
+                                    "type": "CHANNEL",
+                                    "value": "value_series_1"
+                                },
+                                "operator": "",
+                                "value": ""
+                            }
+                        ],
+                        "applyToEntireRow": false,
+                        "styling": {
+                            "backgroundColor": "mdbredwhitegreen",
+                            "reverse": true
+                        }
+                    }
+                ]
+            },
+            "chartType": "Data Table",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "6415e568-7582-4a80-9914-0c854b970b0e"
+            }
+        }
+    },
+    "dataSources": {
+        "src-inv": {
+            "alias": "FMCD: inventory_events",
+            "collection": "inventory_events",
+            "database": "fmcd_streaming",
+            "deployment": "Cluster0",
+            "sourceType": "cluster"
+        },
+        "src-invalert": {
+            "alias": "FMCD: inventory_alerts",
+            "collection": "inventory_alerts",
+            "database": "fmcd_streaming",
+            "deployment": "Cluster0",
+            "sourceType": "cluster"
+        }
+    },
+    "queries": {}
+}
